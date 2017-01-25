@@ -46,7 +46,7 @@
     }
 
     /**
-     * Getter de atributos.
+     * Getter mágico para atributos de Comprobante.
      *
      * @param $name
      *
@@ -57,6 +57,7 @@
     }
 
     /**
+     * Getter para atributos de Comprobante.
      * @param $name
      * @param $default
      *
@@ -67,6 +68,21 @@
       $attr_wrapper = $this->xml->attributes();
 
       return isset($attr_wrapper->{$name}) ? (string) $attr_wrapper->{$name} : $default;
+    }
+
+
+    /**
+     * Getter para nodos child de comprobante.
+     * @param $name
+     * @param bool $default
+     *
+     * @return bool|\SimpleXMLElement
+     */
+    private function getChild($name, $default = FALSE) {
+      $ns = $this->xml->getNamespaces(true);
+      $children = $this->xml->children($ns['cfdi']);
+
+      return isset($children->{$name}) ? $children->{$name} : $default;
     }
 
     /**
