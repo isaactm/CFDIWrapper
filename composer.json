@@ -11,6 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "aura/autoload": "^2.0"
+        "aura/autoload": "^2.0",
+        "moneyphp/money": "^3.0"
     }
 }
