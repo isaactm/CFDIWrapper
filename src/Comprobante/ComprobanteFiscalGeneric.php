@@ -6,14 +6,14 @@
  * Time: 03:35 PM
  */
 
-namespace Crayon\Utils;
+namespace Crayon\Comprobante;
 
 /**
  * Class CfdiWrapper
  * Wrapper para carga de archivos XML
  * @package Crayon\Utils
  */
-class CfdiWrapper {
+abstract class ComprobanteFiscalGeneric implements IComprobanteFiscal{
 
 	/** @var string $file_path Ruta de archivo */
 	private $file_path;
@@ -42,9 +42,28 @@ class CfdiWrapper {
 		}
 	}
 
-	public function getAtributo($name, $default):mixed{
-		$this->xml
+	/**
+	 * Getter de atributos.
+	 *
+	 * @param $name
+	 *
+	 * @return bool
+	 */
+	public function __get( $name ) {
+		return $this->getAtributo( $name, false );
 	}
 
+	/**
+	 * @param $name
+	 * @param $default
+	 *
+	 * @return bool
+	 */
+	private function getAtributo( $name, $default = false ) {
+		/** @var \SimpleXMLElement $attr_wrapper */
+		$attr_wrapper = $this->xml->attributes();
+
+		return isset( $attr_wrapper->{$name} ) ? (string) $attr_wrapper->{$name} : $default;
+	}
 
 }
