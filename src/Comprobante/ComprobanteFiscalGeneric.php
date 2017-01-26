@@ -12,20 +12,14 @@
   use Money\Money;
 
   /**
-   * Class CfdiWrapper
+   * Class ComprobanteFiscalGeneric
    * Wrapper para carga de archivos XML
    * @package Crayon\Utils
    */
-  class ComprobanteFiscalGeneric implements IComprobanteFiscal {
-
-    /** @var string $file_path Ruta de archivo */
-    private $file_path;
-
-    /** @var \SimpleXMLElement $xml Wrapper XML de la factura */
-    private $xml;
+  class ComprobanteFiscalGeneric extends NodeDefinitionGeneric implements IComprobanteFiscal {
 
     /**
-     * CfdiWrapper constructor.
+     * ComprobanteFiscalGeneric constructor.
      *
      * @param $path
      */
@@ -38,51 +32,11 @@
         throw new \InvalidArgumentException('Archivo existe pero no fue posible leerlo.');
       }
 
-      $this->file_path = $path;
-
-      if (!($this->xml = simplexml_load_file($path))) {
+      if (!($xml = simplexml_load_file($path))) {
         throw new \InvalidArgumentException('Fue imposible convertir el archivo a objeto XML');
       }
-    }
 
-    /**
-     * Getter mágico para atributos de Comprobante.
-     *
-     * @param $name
-     *
-     * @return bool
-     */
-    public function __get($name) {
-      return $this->getAtributo($name, FALSE);
-    }
-
-    /**
-     * Getter para atributos de Comprobante.
-     * @param $name
-     * @param $default
-     *
-     * @return bool
-     */
-    private function getAtributo($name, $default = FALSE) {
-      /** @var \SimpleXMLElement $attr_wrapper */
-      $attr_wrapper = $this->xml->attributes();
-
-      return isset($attr_wrapper->{$name}) ? (string) $attr_wrapper->{$name} : $default;
-    }
-
-
-    /**
-     * Getter para nodos child de comprobante.
-     * @param $name
-     * @param bool $default
-     *
-     * @return bool|\SimpleXMLElement
-     */
-    private function getChild($name, $default = FALSE) {
-      $ns = $this->xml->getNamespaces(true);
-      $children = $this->xml->children($ns['cfdi']);
-
-      return isset($children->{$name}) ? $children->{$name} : $default;
+      $this->setSelf($xml);
     }
 
     /**
@@ -364,5 +318,10 @@
       $amount = str_replace('$', '', $amount);
 
       return new Money($amount, new Currency('MXN'));
+    }
+    
+    
+    public function Emisor(){
+      
     }
   }

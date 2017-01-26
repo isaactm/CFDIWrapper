@@ -228,4 +228,12 @@ interface IComprobanteFiscal {
 	 */
 	public function MontoFolioFiscalOrig();
 
+	/**
+	 * Nodo requerido para expresar la información del contribuyente emisor
+	 * del comprobante.
+	 *
+	 * @return IEmisor
+	 */
+	public function Emisor();
+
 }
