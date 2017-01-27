@@ -17,6 +17,14 @@
   interface IEmisor {
 
     /**
+     * IEmisor constructor.
+     *
+     * @param \SimpleXMLElement $emisor_node
+     * @param \Crayon\Comprobante\IComprobanteFiscal $comprobanteFiscal
+     */
+    public function __construct(\SimpleXMLElement $emisor_node, IComprobanteFiscal $comprobanteFiscal);
+
+    /**
      * Atributo requerido para la Clave del Registro Federal de Contribuyentes 
      * correspondiente al contribuyente emisor del comprobante sin guiones o 
      * espacios.
@@ -44,11 +52,20 @@
     public function DomicilioFiscal();
 
     /**
+     * Nodo opcional para precisar la información de ubicación del domicilio en
+     * donde es emitido el comprobante fiscal en caso de que sea distinto del
+     * domicilio fiscal del contribuyente emisor.
+     * Retornará un false cuando el atributo no esté definido.
      *
-     * @return mixed
+     * @return IUbicacion|false
      */
     public function ExpedidoEn();
-    
-    public function RegimenFiscal();
 
+    /**
+     * Nodo requerido para incorporar los regímenes en los que tributa el
+     * contribuyente emisor. Puede contener más de un régimen.
+     *
+     * @return string
+     */
+    public function RegimenFiscal();
   }
