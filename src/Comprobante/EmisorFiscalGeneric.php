@@ -96,7 +96,7 @@
      * domicilio fiscal del contribuyente emisor.
      * Retornará un false cuando el atributo no esté definido.
      *
-     * @return IUbicacion|false
+     * @return IUbicacionFiscal|false
      */
     public function ExpedidoEn() {
       $expedidoEn = $this->getChild(__FUNCTION__, FALSE);
