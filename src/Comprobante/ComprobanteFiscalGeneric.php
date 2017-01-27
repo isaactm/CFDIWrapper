@@ -319,9 +319,54 @@
 
       return new Money($amount, new Currency('MXN'));
     }
-    
-    
-    public function Emisor(){
-      
+
+    /**
+     * Retorna Emisor Fiscal del Comprobante.
+     *
+     * @return IEmisor
+     */
+    public function Emisor() {
+      $emisor = $this->getChild(__FUNCTION__, FALSE);
+
+      if (!$emisor) {
+        throw new \InvalidArgumentException("No ha sido posible obtener el Emisor");
+      }
+
+      return new EmisorFiscalGeneric($emisor, $this);
+    }
+
+    /**
+     * @return IReceptor
+     */
+    public function Receptor() {
+      // TODO: Implement Receptor() method.
+    }
+
+    /**
+     * @return IConceptos
+     */
+    public function Conceptos() {
+      // TODO: Implement Conceptos() method.
+    }
+
+    /**
+     * @return IImpuestos
+     */
+    public function Impuestos() {
+      // TODO: Implement Impuestos() method.
+    }
+
+    /**
+     * @return IComplemento|false
+     */
+    public function Complemento() {
+      // TODO: Implement Complemento() method.
+    }
+
+    /**
+     * @return IAddenda|false
+     */
+    public function Addenda() {
+      // TODO: Implement Addenda() method.
     }
   }
