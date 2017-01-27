@@ -3,18 +3,18 @@
    * Created by PhpStorm.
    * User: IROXIT
    * Date: 27/01/2017
-   * Time: 01:52 PM
+   * Time: 01:56 PM
    */
 
   namespace Crayon\Comprobante;
 
   /**
-   * Class DomicilioFiscalGeneric
+   * Class UbicacionGeneric
    * Tipo definido para expresar domicilios o direcciones.
    *
    * @package Crayon\Comprobante
    */
-  class DomicilioFiscalGeneric extends NodeDefinitionGeneric implements IUbicacionFiscal {
+  class UbicacionGeneric extends NodeDefinitionGeneric implements IUbicacionFiscal  {
 
     /**
      * Ubicacion Fiscal constructor.
