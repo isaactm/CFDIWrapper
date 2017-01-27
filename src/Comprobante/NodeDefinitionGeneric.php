@@ -37,7 +37,7 @@
      *
      * @param \SimpleXMLElement $node
      */
-    public function setSelf(\SimpleXMLElement $node){
+    public function setSelf(\SimpleXMLElement $node) {
       $this->self = $node;
     }
 
@@ -63,12 +63,24 @@
      * @param $name
      * @param bool $default
      *
-     * @return bool|\SimpleXMLElement
+     * @return \SimpleXMLElement|false
      */
     protected function getChild($name, $default = FALSE) {
+      /** @var array $ns */
       $ns = $this->self->getNamespaces(TRUE);
+
+      /** @var \SimpleXMLElement $children */
       $children = $this->self->children($ns['cfdi']);
 
+      /** @noinspection PhpIncompatibleReturnTypeInspection */
       return isset($children->{$name}) ? $children->{$name} : $default;
+    }
+
+    /**
+     * Retorna elemento padre al nodo actual
+     * @return \SimpleXMLElement[]
+     */
+    protected function getParent() {
+      return $this->self->xpath("..");
     }
   }
