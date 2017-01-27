@@ -13,6 +13,7 @@
     "require": {
         "aura/autoload": "^2.0",
         "moneyphp/money": "^3.0",
-        "silex/silex": "^2.0"
+        "silex/silex": "^2.0",
+        "twig/twig": "^2.1"
     }
 }
